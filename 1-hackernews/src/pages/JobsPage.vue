@@ -1,27 +1,21 @@
 <template>
   <div>
-    jobs page
-
-    <div v-for="(user, idx) in users" v-bind:key="idx">{{ user }}</div>
+    <p v-for="(item, idx) in jobs" :key="idx">
+      <a :href="item.url">{{ item.title }}</a>
+      <small>{{ item.time_ago }}, {{ item.domain }}</small>
+    </p>
   </div>
 </template>
 
 <script>
-import { fetchJobsList } from '@/api'
+import { mapState } from 'vuex'
 
 export default {
-  data() {
-    return {
-      users: [],
-    }
+  computed: {
+    ...mapState(['jobs']),
   },
   created() {
-    fetchJobsList()
-      .then(response => {
-        console.log('[JobsPage] fetchJobsList()', response)
-        this.users = response.data
-      })
-      .catch(error => new Error(error))
+    this.$store.dispatch('FETCH_JOBS')
   },
 }
 </script>
