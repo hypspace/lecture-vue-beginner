@@ -29,11 +29,11 @@ export const router = new VueRouter({
       component: NewsPage,
     },
     {
-      path: '/item',
+      path: '/item/:id',
       component: ItemPage,
     },
     {
-      path: '/user',
+      path: '/user/:id',
       component: UserPage,
     },
   ],
